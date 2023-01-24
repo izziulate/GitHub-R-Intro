@@ -16,3 +16,71 @@ data("penguins")
 penguins
 
 ```
+
+```{r}
+source("Setup.R")
+```
+
+```{r}
+myList["Fruit"]
+myList["fruit"]
+```
+
+```{r}
+penguins$flipper_length_mm
+```
+
+```{r}
+penguins['island'=='Dream',
+```
+
+```{r}
+penguins[1:5, c("species","island","flipper_length_mm") & penguins$island=="Dream"]
+
+```
+
+```{r}
+filter(penguins, species == "Adelie")
+
+filter(penguins, species != "Adelie")
+
+filter(penguins, island %in% c("Dream", "Torgersen") & !is.na(bill_length_mm))
+
+```
+
+```{r}
+select(penguins, last_col(), everything(vars = NULL))
+
+```
+
+```{r}
+penguins %>%
+  mutate(size_group = if_else(body_mass_g < mean(body_mass_g), "small", "large") %>%
+ select(species, year, size_group)
+```
+
+Not sure why it won't print the text to the column...
+
+```{r}
+penguins %>% 
+  filter( year != c(2008, 2009))
+```
+
+```{r}
+penguins %>%
+  group_by(species) %>%
+  mean(flipper_length_mm) +
+
+ggplot(penguins) +
+  geom_bar(mapping = aes(x = flipper_length_mm, fill = species))
+```
+
+Not sure how to do this
+
+```{r}
+
+penguins %>%
+  filter(island == "Dream") %>%
+ggplot() +
+  geom_point(mapping = aes(x = bill_length_mm, y = bill_depth_mm, color = species))
+```

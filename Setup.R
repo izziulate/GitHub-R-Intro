@@ -20,8 +20,7 @@ packages <- c('tidyverse',
               'rgdal')
 
 packageLoad(packages)
-Yes
-Yes
+
 
 
 

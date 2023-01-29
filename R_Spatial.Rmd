@@ -134,4 +134,38 @@ rm(counties, roads)
 ```{r}
 load("data/spatial_objects.RData")
 ```
+1. Filter out the counties data set to only include Larimer, Denver, and Pueblo counties.
+```{r}
+counties %>%
+  filter(NAME %in% c("Larimer", "Denver", "Pueblo"))
+
+```
+
+2. Make a map of the counties data colored by county area. Make a second map of counties colored by their total area of water.
+
+```{r}
+tm_shape(counties)+
+  tm_polygons("ALAND")
+```
+```{r}
+tm_shape(counties)+
+  tm_polygons("AWATER")
+```
+
+3.Make a barplot comparing the elevation of your 3 points in the Poudre Canyon (note: explore the extract() function in the terra package).
+```{r}
+poudre_points_sf_elevations <- extract(elevation, poudre_points_sf)
+ 
+
+ggplot(poudre_points_sf_elevations[ ,1]) +
+  geom_bar(aes(x = name, y = elevation), stat = "identity")
+
+
+#?????
+
+```
+
+Why are there 4 features in our Poudre Canyon Highway variable instead of 1?
+
+
 
